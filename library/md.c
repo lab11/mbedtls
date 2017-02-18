@@ -173,6 +173,14 @@ const mbedtls_md_info_t *mbedtls_md_info_from_type( mbedtls_md_type_t md_type )
         case MBEDTLS_MD_SHA512:
             return( &mbedtls_sha512_info );
 #endif
+        case MBEDTLS_MD_NONE:
+        case MBEDTLS_MD_MD2:
+        case MBEDTLS_MD_MD4:
+        case MBEDTLS_MD_MD5:
+        case MBEDTLS_MD_SHA1:
+        case MBEDTLS_MD_SHA384:
+        case MBEDTLS_MD_SHA512:
+        case MBEDTLS_MD_RIPEMD160:
         default:
             return( NULL );
     }

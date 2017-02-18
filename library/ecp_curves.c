@@ -635,13 +635,13 @@ static int ecp_mod_p224k1( mbedtls_mpi * );
 static int ecp_mod_p256k1( mbedtls_mpi * );
 #endif
 
-#define LOAD_GROUP_A( G )   ecp_group_load( grp,            \
-                            G ## _p,  sizeof( G ## _p  ),   \
-                            G ## _a,  sizeof( G ## _a  ),   \
-                            G ## _b,  sizeof( G ## _b  ),   \
-                            G ## _gx, sizeof( G ## _gx ),   \
-                            G ## _gy, sizeof( G ## _gy ),   \
-                            G ## _n,  sizeof( G ## _n  ) )
+// #define LOAD_GROUP_A( G )   ecp_group_load( grp,
+//                             G ## _p,  sizeof( G ## _p  ),
+//                             G ## _a,  sizeof( G ## _a  ),
+//                             G ## _b,  sizeof( G ## _b  ),
+//                             G ## _gx, sizeof( G ## _gx ),
+//                             G ## _gy, sizeof( G ## _gy ),
+//                             G ## _n,  sizeof( G ## _n  ) )
 
 #define LOAD_GROUP( G )     ecp_group_load( grp,            \
                             G ## _p,  sizeof( G ## _p  ),   \
@@ -765,6 +765,15 @@ int mbedtls_ecp_group_load( mbedtls_ecp_group *grp, mbedtls_ecp_group_id id )
             return( ecp_use_curve25519( grp ) );
 #endif /* MBEDTLS_ECP_DP_CURVE25519_ENABLED */
 
+        case MBEDTLS_ECP_DP_NONE:
+        case MBEDTLS_ECP_DP_SECP224R1:
+        case MBEDTLS_ECP_DP_BP256R1:
+        case MBEDTLS_ECP_DP_BP384R1:
+        case MBEDTLS_ECP_DP_BP512R1:
+        case MBEDTLS_ECP_DP_CURVE25519:
+        case MBEDTLS_ECP_DP_SECP192K1:
+        case MBEDTLS_ECP_DP_SECP224K1:
+        case MBEDTLS_ECP_DP_SECP256K1:
         default:
             mbedtls_ecp_group_free( grp );
             return( MBEDTLS_ERR_ECP_FEATURE_UNAVAILABLE );
